@@ -5,7 +5,7 @@ export function getFileserverHits(req, res) {
         <html>
             <body>
                 <h1>Welcome, Chirpy Admin</h1>
-                <p>Chirpy has been visited ${config.fileserverHits} times!</p>
+                <p>Chirpy has been visited ${config.api.fileserverHits} times!</p>
             </body>
         </html>
         `);

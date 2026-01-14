@@ -1,24 +1,42 @@
 import { Request, Response } from "express";
 import { BadRequestError } from "./middleware.js"
+import { createChirp } from "./db/queries/chirps.js";
+import { isValidUUID, respondWithJSON } from "./api/readiness.js";
 
 export async function handlerValidateChirp(req: Request, res: Response) {
-  res.header("Content-Type", "application/json");
 
-  const parsed = req.body;
+  const {body, userId} = req.body;
 
-  if (!parsed.body) {
+  if (!body) {
     // return res.status(400).send({ error: "Something went wrong" });
     throw new BadRequestError("Something went wrong");
   }
 
-  if (parsed.body.length > 140) {
+  if (body.length > 140) {
     throw new BadRequestError("Chirp is too long. Max length is 140");
   }
 
-  const validatedBody = checkProfane(parsed.body);
+  // if(!isValidUUID(userId)) {
+  //   throw new BadRequestError("Invalid userId");
+  // }
 
-  return res.status(200).send({ "cleanedBody": validatedBody });
+  const validatedBody = checkProfane(body);
+
+  const newChirp = await createChirp({
+    body,
+    userId
+  });
+
+  respondWithJSON(res, 201, {
+    id: newChirp.id,
+    createdAt: newChirp.createdAt,
+    updatedAt: newChirp.updatedAt,
+    body: newChirp.body,
+    userId: newChirp.userId
+  });
 }
+
+
 
 function checkProfane(text: string) {
     const profanity = ["kerfuffle", "sharbert", "fornax"];

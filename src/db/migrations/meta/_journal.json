@@ -8,6 +8,13 @@
       "when": 1768329678356,
       "tag": "0000_wakeful_spitfire",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1768424983078,
+      "tag": "0001_narrow_sasquatch",
+      "breakpoints": true
     }
   ]
 }

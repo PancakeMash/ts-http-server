@@ -4,7 +4,6 @@ export async function createUser(user) {
     const [result] = await db
         .insert(users)
         .values(user)
-        .onConflictDoNothing()
         .returning();
     return result;
 }

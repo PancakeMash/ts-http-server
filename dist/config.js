@@ -1,7 +1,17 @@
 process.loadEnvFile();
+const migrationConfig = {
+    migrationsFolder: "./src/db/migrations",
+};
+const dbConfig = {
+    dbURL: envOrThrow("DB_URL"),
+    migrationConfig: migrationConfig
+};
+const apiConfig = {
+    fileserverHits: 0
+};
 export const config = {
-    fileserverHits: 0,
-    dbURL: envOrThrow("DB_URL")
+    db: dbConfig,
+    api: apiConfig
 };
 function envOrThrow(key) {
     if (!process.env[key]) {
