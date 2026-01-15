@@ -4,6 +4,7 @@ import { getFileserverHits } from "./metrics.js";
 import { resetFileserverHits } from "./reset.js";
 import { middlewareLogResponses, middlewareMetricsInc, middlewareErrorHandler } from "./middleware.js";
 import { handlerValidateChirp } from "./validate.js";
+import { handlerGetChirpById, handlerGetChirps } from "./chirps.js";
 import { postUsers } from "./users.js";
 
 import postgres from "postgres";
@@ -32,6 +33,8 @@ app.post("/api/chirps", async (req, res, next) => {
         next(err);
     }
 });
+app.get("/api/chirps", handlerGetChirps);
+app.get("/api/chirps/:chirpID", handlerGetChirpById);
 app.post("/api/users", postUsers);
 
 app.use(middlewareErrorHandler);

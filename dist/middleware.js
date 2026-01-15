@@ -41,7 +41,7 @@ class ForbiddenError extends Error {
         this.statusCode = 403;
     }
 }
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
     statusCode;
     constructor(message) {
         super(message);

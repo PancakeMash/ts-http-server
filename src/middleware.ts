@@ -57,7 +57,7 @@ class ForbiddenError extends Error {
     }
 }
 
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
     statusCode: number;
 
     constructor(message: string) {
