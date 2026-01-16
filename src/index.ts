@@ -6,6 +6,7 @@ import { middlewareLogResponses, middlewareMetricsInc, middlewareErrorHandler } 
 import { handlerValidateChirp } from "./validate.js";
 import { handlerGetChirpById, handlerGetChirps } from "./chirps.js";
 import { postUsers } from "./users.js";
+import { handlerLogin } from "./login.js";
 
 import postgres from "postgres";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
@@ -36,6 +37,7 @@ app.post("/api/chirps", async (req, res, next) => {
 app.get("/api/chirps", handlerGetChirps);
 app.get("/api/chirps/:chirpID", handlerGetChirpById);
 app.post("/api/users", postUsers);
+app.post("/api/login", handlerLogin);
 
 app.use(middlewareErrorHandler);
 

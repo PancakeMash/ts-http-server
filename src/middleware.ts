@@ -39,7 +39,7 @@ export class BadRequestError extends Error {
     }
 }
 
-class UnauthorisedError extends Error {
+export class UnauthorisedError extends Error {
     statusCode: number;
 
     constructor(message: string) {

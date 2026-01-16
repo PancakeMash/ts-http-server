@@ -27,7 +27,7 @@ export class BadRequestError extends Error {
         this.statusCode = 400;
     }
 }
-class UnauthorisedError extends Error {
+export class UnauthorisedError extends Error {
     statusCode;
     constructor(message) {
         super(message);
