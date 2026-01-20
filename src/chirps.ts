@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { NotFoundError } from "./middleware.js";
 import { getChirps, getChirpById } from "./db/queries/chirps.js";
 import { respondWithJSON } from "./api/readiness.js";
-import { get } from "node:http";
 
 export async function handlerGetChirps(req: Request, res: Response) {
     const allChirps = await getChirps();

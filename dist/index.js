@@ -3,7 +3,7 @@ import { handlerReadiness } from "./api/readiness.js";
 import { getFileserverHits } from "./metrics.js";
 import { resetFileserverHits } from "./reset.js";
 import { middlewareLogResponses, middlewareMetricsInc, middlewareErrorHandler } from "./middleware.js";
-import { handlerValidateChirp } from "./validate.js";
+import { handlerChirpsCreate } from "./validate.js";
 import { handlerGetChirpById, handlerGetChirps } from "./chirps.js";
 import { postUsers } from "./users.js";
 import { handlerLogin } from "./login.js";
@@ -23,7 +23,7 @@ app.get("/admin/metrics", getFileserverHits);
 app.post("/admin/reset", resetFileserverHits);
 app.post("/api/chirps", async (req, res, next) => {
     try {
-        await handlerValidateChirp(req, res);
+        await handlerChirpsCreate(req, res);
     }
     catch (err) {
         next(err);

@@ -11,7 +11,8 @@ const apiConfig = {
 };
 export const config = {
     db: dbConfig,
-    api: apiConfig
+    api: apiConfig,
+    secretKey: envOrThrow("JWT_KEY")
 };
 function envOrThrow(key) {
     if (!process.env[key]) {
