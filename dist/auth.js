@@ -1,6 +1,7 @@
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { UnauthorisedError } from './middleware.js';
+import crypto from 'crypto';
 export async function hashPassword(password) {
     const hash = await argon2.hash(password);
     return hash;
@@ -41,4 +42,7 @@ export function getBearerToken(req) {
         throw new UnauthorisedError('Invalid Authorization header format');
     }
     return parts[1].trim();
+}
+export function makeRefreshToken() {
+    return crypto.randomBytes(32).toString('hex');
 }

@@ -11,6 +11,7 @@ import postgres from "postgres";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { config } from "./config.js";
+import { handlerRefreshToken, handlerRevokeToken } from "./tokens.js";
 const migrationClient = postgres(config.db.dbURL, { max: 1 });
 await migrate(drizzle(migrationClient), config.db.migrationConfig);
 const app = express();
@@ -33,6 +34,8 @@ app.get("/api/chirps", handlerGetChirps);
 app.get("/api/chirps/:chirpID", handlerGetChirpById);
 app.post("/api/users", postUsers);
 app.post("/api/login", handlerLogin);
+app.post("/api/refresh", handlerRefreshToken);
+app.post("/api/revoke", handlerRevokeToken);
 app.use(middlewareErrorHandler);
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);

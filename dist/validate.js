@@ -3,28 +3,6 @@ import { createChirp } from "./db/queries/chirps.js";
 import { respondWithJSON } from "./api/readiness.js";
 import { getBearerToken, validateJWT } from "./auth.js";
 import { config } from "./config.js";
-// export async function handlerValidateChirp(req: Request, res: Response) {
-//   const {body, userId} = req.body;
-//   if (!body) {
-//     // return res.status(400).send({ error: "Something went wrong" });
-//     throw new BadRequestError("Something went wrong");
-//   }
-//   if (body.length > 140) {
-//     throw new BadRequestError("Chirp is too long. Max length is 140");
-//   }
-//   const validatedBody = checkProfane(body);
-//   const newChirp = await createChirp({
-//     body,
-//     userId
-//   });
-//   respondWithJSON(res, 201, {
-//     id: newChirp.id,
-//     createdAt: newChirp.createdAt,
-//     updatedAt: newChirp.updatedAt,
-//     body: newChirp.body,
-//     userId: newChirp.userId
-//   });
-// }
 function validateChirp(body) {
     if (!body) {
         throw new BadRequestError("Chirp body is required");
