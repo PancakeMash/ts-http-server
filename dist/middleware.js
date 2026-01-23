@@ -34,7 +34,7 @@ export class UnauthorisedError extends Error {
         this.statusCode = 401;
     }
 }
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
     statusCode;
     constructor(message) {
         super(message);

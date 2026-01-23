@@ -4,8 +4,8 @@ import { getFileserverHits } from "./metrics.js";
 import { resetFileserverHits } from "./reset.js";
 import { middlewareLogResponses, middlewareMetricsInc, middlewareErrorHandler } from "./middleware.js";
 import { handlerChirpsCreate } from "./validate.js";
-import { handlerGetChirpById, handlerGetChirps } from "./chirps.js";
-import { postUsers } from "./users.js";
+import { handlerGetChirpById, handlerGetChirps, handlerDeleteChirp } from "./chirps.js";
+import { postUsers, handlerUpdateUser } from "./users.js";
 import { handlerLogin } from "./login.js";
 import { handlerRefreshToken, handlerRevokeToken } from "./tokens.js";
 
@@ -42,6 +42,10 @@ app.post("/api/users", postUsers);
 app.post("/api/login", handlerLogin);
 app.post("/api/refresh", handlerRefreshToken);
 app.post("/api/revoke", handlerRevokeToken);
+
+app.put("/api/users", handlerUpdateUser);
+
+app.delete("/api/chirps/:chirpID", handlerDeleteChirp);
 
 app.use(middlewareErrorHandler);
 

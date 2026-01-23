@@ -48,7 +48,7 @@ export class UnauthorisedError extends Error {
     }
 }
 
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
     statusCode: number;
 
     constructor(message: string) {
