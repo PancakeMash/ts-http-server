@@ -26,7 +26,8 @@ type APIConfig = {
 export const config = {
     db: dbConfig,
     api: apiConfig,
-    secretKey: envOrThrow("JWT_KEY")
+    secretKey: envOrThrow("JWT_KEY"),
+    PolkaKey: envOrThrow("POLKA_KEY")
 };
 
 function envOrThrow(key: string) {

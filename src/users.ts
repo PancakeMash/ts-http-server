@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { BadRequestError } from "./middleware.js";
-import { createUser, updateUser } from "./db/queries/users.js";
+import { BadRequestError, NotFoundError } from "./middleware.js";
+import { createUser, updateUser, updateUserRed } from "./db/queries/users.js";
 import { respondWithJSON } from "./api/readiness.js";
-import { hashPassword, getBearerToken, validateJWT } from "./auth.js";
+import { hashPassword, getBearerToken, validateJWT, getAPIKey } from "./auth.js";
 import { config } from "./config.js";
 
 export async function postUsers(req: Request, res: Response) {
@@ -21,6 +21,7 @@ export async function postUsers(req: Request, res: Response) {
     email: user.email,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
+    isChirpyRed: user.isChirpyRed
   });
 }
 
@@ -45,4 +46,20 @@ export async function handlerUpdateUser(req: Request, res: Response) {
     updatedAt: updatedUser.updatedAt,
   });
 
+}
+
+export async function handlerUpdateRed(req:Request, res: Response) {
+  const authHeader = getAPIKey(req);
+  
+  const {event, data} = req.body;
+  if (event !== "user.upgraded") {
+    return respondWithJSON(res, 204, []);
+  }
+
+  const upgradeUser = await updateUserRed(data['userId']);
+  if (!upgradeUser) {
+    throw new NotFoundError("User could not be found or upgraded");
+  }
+
+  return respondWithJSON(res, 204, '');
 }

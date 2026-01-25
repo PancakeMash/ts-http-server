@@ -38,7 +38,8 @@ export async function handlerLogin(req: Request, res: Response) {
         updatedAt: getUser.updatedAt,
         email: getUser.email,
         token: token,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
+        isChirpyRed: getUser.isChirpyRed
     });
 
 }

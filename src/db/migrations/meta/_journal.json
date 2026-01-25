@@ -29,6 +29,20 @@
       "when": 1769110595674,
       "tag": "0003_mighty_reptil",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1769363378285,
+      "tag": "0004_broken_hairball",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1769364062394,
+      "tag": "0005_dark_virginia_dare",
+      "breakpoints": true
     }
   ]
 }
