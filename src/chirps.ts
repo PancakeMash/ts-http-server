@@ -1,15 +1,33 @@
 import { Request, Response } from "express";
 import { NotFoundError } from "./middleware.js";
-import { getChirps, getChirpById, deleteChirpById } from "./db/queries/chirps.js";
+import { getChirps, getChirpById, deleteChirpById, getChirpByAuthorId } from "./db/queries/chirps.js";
 import { respondWithJSON } from "./api/readiness.js";
 import { getBearerToken, validateJWT } from "./auth.js";
 import { ForbiddenError } from "./middleware.js";
 import { config } from "./config.js";
 
 export async function handlerGetChirps(req: Request, res: Response) {
-    const allChirps = await getChirps();
-    console.log(allChirps);
-    respondWithJSON(res, 200, allChirps);
+    let chirpsData;
+    let authorId = "";
+    let sortBy = "asc";
+
+    let authorIdQuery = req.query?.authorId;
+    if (typeof authorIdQuery === "string") {
+        authorId = authorIdQuery;
+    }
+
+    let sortByQuery = req.query?.sort;
+    if (typeof sortByQuery === "string") {
+        sortBy = sortByQuery;
+    }
+    
+    if (authorId !== "") {
+        chirpsData = await getChirpByAuthorId(authorId, sortBy);
+    } else {
+        chirpsData = await getChirps(sortBy);
+    }
+
+    respondWithJSON(res, 200, chirpsData);
 }
 
 export async function handlerGetChirpById(req: Request, res: Response) {
